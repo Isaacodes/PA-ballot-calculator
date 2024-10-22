@@ -30,10 +30,10 @@ function calculateReturnedBallots() {
     const dReturnRate = parseFloat(document.getElementById("dReturnRate").value) / 100;
     const oReturnRate = parseFloat(document.getElementById("oReturnRate").value) / 100;
 
-    // Update the percentage outputs
-    document.getElementById("rReturnRateOutput").textContent = `${(rReturnRate * 100).toFixed(0)}%`;
-    document.getElementById("dReturnRateOutput").textContent = `${(dReturnRate * 100).toFixed(0)}%`;
-    document.getElementById("oReturnRateOutput").textContent = `${(oReturnRate * 100).toFixed(0)}%`;
+    // Update the percentage outputs with 1 decimal place
+    document.getElementById("rReturnRateOutput").textContent = `${(rReturnRate * 100).toFixed(1)}%`;
+    document.getElementById("dReturnRateOutput").textContent = `${(dReturnRate * 100).toFixed(1)}%`;
+    document.getElementById("oReturnRateOutput").textContent = `${(oReturnRate * 100).toFixed(1)}%`;
 
     // Calculate returned ballots
     const rReturned = Math.round(rBallotRequests * rReturnRate);
@@ -51,6 +51,7 @@ function calculateReturnedBallots() {
 
     calculateVoteBreakdown(rReturned, dReturned, oReturned);
 }
+
 
 function calculateVoteBreakdown(rReturned = 0, dReturned = 0, oReturned = 0) {
     const rVoteSliderValue = parseInt(document.getElementById("rVoteBreakdown").value);
@@ -108,6 +109,104 @@ function updateProjectedFirewall(trumpVotes, harrisVotes) {
         firewallElement.style.color = 'black';
     }
 }
+
+let custom2024Data = {
+    requests: {
+        R: 0,
+        D: 0,
+        O: 0
+    },
+    returns: {
+        R: 0,
+        D: 0,
+        O: 0
+    }
+};
+
+const electionData = {
+    "2022": {
+        requests: {
+            R: 299264,
+            D: 974865,
+            O: 146878
+        },
+        returns: {
+            R: 87.90,
+            D: 87.95,
+            O: 83.86
+        }
+    },
+    "2020": {
+        requests: {
+            R: 772318,
+            D: 1940836,
+            O: 366556
+        },
+        returns: {
+            R: 80.05,
+            D: 88.56,
+            O: 84.87
+        }
+    }
+};
+
+function populateElectionData(year) {
+    let data;
+
+    if (year === "2024") {
+        // Use the custom 2024 data without resetting
+        data = custom2024Data;
+    } else {
+        // Load predefined data for 2022 and 2020
+        data = electionData[year];
+    }
+
+    // Set Ballot Requests
+    document.getElementById("rBallotRequests").value = data.requests.R;
+    document.getElementById("dBallotRequests").value = data.requests.D;
+    document.getElementById("oBallotRequests").value = data.requests.O;
+
+    // Set Ballot Returns with 1 decimal point
+    document.getElementById("rReturnRate").value = data.returns.R.toFixed(1);
+    document.getElementById("dReturnRate").value = data.returns.D.toFixed(1);
+    document.getElementById("oReturnRate").value = data.returns.O.toFixed(1);
+
+    // Trigger the calculations to update outputs
+    calculateTotalBallotRequests();
+    calculateReturnedBallots();
+
+    // Update active tab
+    document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(`tab${year}`).classList.add('active');
+}
+
+
+// Save user changes for 2024
+function saveCustom2024Data() {
+    custom2024Data.requests.R = parseInt(document.getElementById("rBallotRequests").value);
+    custom2024Data.requests.D = parseInt(document.getElementById("dBallotRequests").value);
+    custom2024Data.requests.O = parseInt(document.getElementById("oBallotRequests").value);
+
+    custom2024Data.returns.R = parseFloat(document.getElementById("rReturnRate").value);
+    custom2024Data.returns.D = parseFloat(document.getElementById("dReturnRate").value);
+    custom2024Data.returns.O = parseFloat(document.getElementById("oReturnRate").value);
+}
+
+// Add event listeners to track changes for 2024
+document.getElementById("rBallotRequests").addEventListener("input", saveCustom2024Data);
+document.getElementById("dBallotRequests").addEventListener("input", saveCustom2024Data);
+document.getElementById("oBallotRequests").addEventListener("input", saveCustom2024Data);
+
+document.getElementById("rReturnRate").addEventListener("input", saveCustom2024Data);
+document.getElementById("dReturnRate").addEventListener("input", saveCustom2024Data);
+document.getElementById("oReturnRate").addEventListener("input", saveCustom2024Data);
+
+// Set 2024 as the default on page load
+window.onload = function() {
+    populateElectionData('2024');
+};
+
+
 
 // Event Listeners for sliders
 document.getElementById("rVoteBreakdown").addEventListener("input", () => calculateReturnedBallots());
