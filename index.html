@@ -11,6 +11,13 @@
         <h1>Ballot Request & Return Calculator</h1>
     </div> 
 
+    <div class="tabs">
+        <button id="tab2024" onclick="populateElectionData('2024')" class="active">2024 General Election</button>
+        <button id="tab2022" onclick="populateElectionData('2022')">2022 General Election</button>
+        <button id="tab2020" onclick="populateElectionData('2020')">2020 General Election</button>
+    </div>
+    
+
     <div class="container">
         <!-- Ballot Request Section -->
         <div class="column">
@@ -37,15 +44,15 @@
             <h2>Ballot Return Rates</h2>
             <div class="slider-container">
                 <label for="rReturnRate" class="red">R Ballot Return Rate (%): <output id="rReturnRateOutput">0%</output> | Returns: <output id="rReturnedOutput">0</output></label>
-                <input type="range" id="rReturnRate" min="0" max="100" value="0" step="1" oninput="calculateReturnedBallots()">
+                <input type="range" id="rReturnRate" min="0.0" max="100.0" value="0.0" step="0.5" oninput="calculateReturnedBallots()">
             </div>
             <div class="slider-container">
                 <label for="dReturnRate" class="blue">D Ballot Return Rate (%): <output id="dReturnRateOutput">0%</output> | Returns: <output id="dReturnedOutput">0</output></label>
-                <input type="range" id="dReturnRate" min="0" max="100" value="0" step="1" oninput="calculateReturnedBallots()">
+                <input type="range" id="dReturnRate" min="0.0" max="100.0" value="0.0" step="0.5" oninput="calculateReturnedBallots()">
             </div>
             <div class="slider-container">
                 <label for="oReturnRate">Other Ballot Return Rate (%): <output id="oReturnRateOutput">0%</output> | Returns: <output id="oReturnedOutput">0</output></label>
-                <input type="range" id="oReturnRate" min="0" max="100" value="0" step="1" oninput="calculateReturnedBallots()">
+                <input type="range" id="oReturnRate" min="0.0" max="100.0" value="0.0" step="0.5" oninput="calculateReturnedBallots()">
             </div>
             <div class="slider-container">
                 <label for="totalReturnedBallots">Total Returned Ballots: <output id="totalReturnedBallots">0</output></label>
