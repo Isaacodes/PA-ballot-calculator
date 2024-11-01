@@ -1,127 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ballot Request & Return Calculator</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="main-header"> 
-        <h1>Ballot Request & Return Calculator</h1>
-    </div> 
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="main-header">
+      <h1>Ballot Request & Return Calculator</h1>
+    </div>
 
     <div class="tabs">
-        <button id="tab2024" onclick="populateElectionData('2024')" class="active">2024 General Election</button>
-        <button id="tab2022" onclick="populateElectionData('2022')">2022 General Election</button>
-        <button id="tab2020" onclick="populateElectionData('2020')">2020 General Election</button>
+      <button
+        id="tab2024"
+        onclick="populateElectionData('2024')"
+        class="active"
+      >
+        2024 General Election
+      </button>
+      <button id="tab2022" onclick="populateElectionData('2022')">
+        2022 General Election
+      </button>
+      <button id="tab2020" onclick="populateElectionData('2020')">
+        2020 General Election
+      </button>
     </div>
-    
 
     <div class="container">
-        <!-- Ballot Request Section -->
-        <div class="column">
-            <h2>Ballot Requests</h2>
-            <div class="slider-container">
-                <label for="rBallotRequests" class="red">R Ballot Requests: <output id="rBallotRequestsOutput">0</output></label>
-                <input type="range" id="rBallotRequests" min="0" max="2000000" step="2500" value="0" oninput="calculateTotalBallotRequests()">
-            </div>
-            <div class="slider-container">
-                <label for="dBallotRequests" class="blue">D Ballot Requests: <output id="dBallotRequestsOutput">0</output></label>
-                <input type="range" id="dBallotRequests" min="0" max="2000000" step="2500" value="0" oninput="calculateTotalBallotRequests()">
-            </div>
-            <div class="slider-container">
-                <label for="oBallotRequests">Other Ballot Requests: <output id="oBallotRequestsOutput">0</output></label>
-                <input type="range" id="oBallotRequests" min="0" max="2000000" step="2500" value="0" oninput="calculateTotalBallotRequests()">
-            </div>
-            <div class="slider-container">
-                <label for="totalBallotRequests">Total Ballot Requests: <output id="totalBallotRequests">0</output></label>
-            </div>
+      <!-- Ballot Request Section -->
+      <div class="column">
+        <h2>Ballot Requests</h2>
+        <div class="slider-container">
+          <label for="rBallotRequests" class="red"
+            >R Ballot Requests:
+            <output id="rBallotRequestsOutput">0</output></label
+          >
+          <input
+            type="range"
+            id="rBallotRequests"
+            min="0"
+            max="2000000"
+            step="2500"
+            value="0"
+            oninput="calculateTotalBallotRequests()"
+          />
         </div>
+        <div class="slider-container">
+          <label for="dBallotRequests" class="blue"
+            >D Ballot Requests:
+            <output id="dBallotRequestsOutput">0</output></label
+          >
+          <input
+            type="range"
+            id="dBallotRequests"
+            min="0"
+            max="2000000"
+            step="2500"
+            value="0"
+            oninput="calculateTotalBallotRequests()"
+          />
+        </div>
+        <div class="slider-container">
+          <label for="oBallotRequests"
+            >Other Ballot Requests:
+            <output id="oBallotRequestsOutput">0</output></label
+          >
+          <input
+            type="range"
+            id="oBallotRequests"
+            min="0"
+            max="2000000"
+            step="2500"
+            value="0"
+            oninput="calculateTotalBallotRequests()"
+          />
+        </div>
+        <div class="slider-container">
+          <label for="totalBallotRequests"
+            >Total Ballot Requests:
+            <output id="totalBallotRequests">0</output></label
+          >
+        </div>
+      </div>
 
-        <!-- Ballot Return Rate Section -->
-        <div class="column">
-            <h2>Ballot Return Rates</h2>
-            <div class="slider-container">
-                <label for="rReturnRate" class="red">R Ballot Return Rate (%): <output id="rReturnRateOutput">0%</output> | Returns: <output id="rReturnedOutput">0</output></label>
-                <input type="range" id="rReturnRate" min="0.0" max="100.0" value="0.0" step="0.5" oninput="calculateReturnedBallots()">
-            </div>
-            <div class="slider-container">
-                <label for="dReturnRate" class="blue">D Ballot Return Rate (%): <output id="dReturnRateOutput">0%</output> | Returns: <output id="dReturnedOutput">0</output></label>
-                <input type="range" id="dReturnRate" min="0.0" max="100.0" value="0.0" step="0.5" oninput="calculateReturnedBallots()">
-            </div>
-            <div class="slider-container">
-                <label for="oReturnRate">Other Ballot Return Rate (%): <output id="oReturnRateOutput">0%</output> | Returns: <output id="oReturnedOutput">0</output></label>
-                <input type="range" id="oReturnRate" min="0.0" max="100.0" value="0.0" step="0.5" oninput="calculateReturnedBallots()">
-            </div>
-            <div class="slider-container">
-                <label for="totalReturnedBallots">Total Returned Ballots: <output id="totalReturnedBallots">0</output></label>
-            </div>
+      <!-- Ballot Return Rate Section -->
+      <div class="column">
+        <h2>Ballot Return Rates</h2>
+        <div class="slider-container">
+          <label for="rReturnRate" class="red"
+            >R Ballot Return Rate (%):
+            <output id="rReturnRateOutput">0%</output> | Returns:
+            <output id="rReturnedOutput">0</output></label
+          >
+          <input
+            type="range"
+            id="rReturnRate"
+            min="0.0"
+            max="100.0"
+            value="0.0"
+            step="0.5"
+            oninput="calculateReturnedBallots()"
+          />
         </div>
+        <div class="slider-container">
+          <label for="dReturnRate" class="blue"
+            >D Ballot Return Rate (%):
+            <output id="dReturnRateOutput">0%</output> | Returns:
+            <output id="dReturnedOutput">0</output></label
+          >
+          <input
+            type="range"
+            id="dReturnRate"
+            min="0.0"
+            max="100.0"
+            value="0.0"
+            step="0.5"
+            oninput="calculateReturnedBallots()"
+          />
+        </div>
+        <div class="slider-container">
+          <label for="oReturnRate"
+            >Other Ballot Return Rate (%):
+            <output id="oReturnRateOutput">0%</output> | Returns:
+            <output id="oReturnedOutput">0</output></label
+          >
+          <input
+            type="range"
+            id="oReturnRate"
+            min="0.0"
+            max="100.0"
+            value="0.0"
+            step="0.5"
+            oninput="calculateReturnedBallots()"
+          />
+        </div>
+        <div class="slider-container">
+          <label for="totalReturnedBallots"
+            >Total Returned Ballots:
+            <output id="totalReturnedBallots">0</output></label
+          >
+        </div>
+      </div>
     </div>
 
     <!-- Trump/Harris Vote Breakdown Section in Three Columns -->
     <div class="vote-breakdown">
-        <h2>Trump vs Harris Vote Breakdown</h2>
-        <div class="breakdown-container">
-            <!-- R Ballot Returns Vote Breakdown -->
-            <div class="breakdown-column">
-                <h3>Republican</h3>
-                <input type="range" id="rVoteBreakdown" min="0" max="100" value="50" oninput="calculateVoteBreakdown()">
-                <p class="red">Trump: <output id="rTrumpPercent">50</output>% <span class="percentage-divider">|</span> <span class="blue">Harris: <output id="rHarrisPercent">50</output>%</span></p>
-                <p class="red">Total Trump Votes (R): <output id="rTrumpVotes">0</output></p>
-                <p class="blue">Total Harris Votes (R): <output id="rHarrisVotes">0</output></p>
-            </div>
-
-            <!-- D Ballot Returns Vote Breakdown -->
-            <div class="breakdown-column">
-                <h3>Democrat</h3>
-                <input type="range" id="dVoteBreakdown" min="0" max="100" value="50" oninput="calculateVoteBreakdown()">
-                <p class="red">Trump: <output id="dTrumpPercent">50</output>% <span class="percentage-divider">|</span> <span class="blue">Harris: <output id="dHarrisPercent">50</output>%</span></p>
-                <p class="red">Total Trump Votes (D): <output id="dTrumpVotes">0</output></p>
-                <p class="blue">Total Harris Votes (D): <output id="dHarrisVotes">0</output></p>
-            </div>
-
-            <!-- Other Ballot Returns Vote Breakdown -->
-            <div class="breakdown-column">
-                <h3>Other</h3>
-                <input type="range" id="oVoteBreakdown" min="0" max="100" value="50" oninput="calculateVoteBreakdown()">
-                <p class="red">Trump: <output id="oTrumpPercent">50</output>% <span class="percentage-divider">|</span> <span class="blue">Harris: <output id="oHarrisPercent">50</output>%</span></p>
-                <p class="red">Total Trump Votes (Other): <output id="oTrumpVotes">0</output></p>
-                <p class="blue">Total Harris Votes (Other): <output id="oHarrisVotes">0</output></p>
-            </div>
+      <h2>Trump vs Harris Vote Breakdown</h2>
+      <div class="breakdown-container">
+        <!-- R Ballot Returns Vote Breakdown -->
+        <div class="breakdown-column">
+          <h3>Republican</h3>
+          <input
+            type="range"
+            id="rVoteBreakdown"
+            min="0"
+            max="100"
+            value="50"
+            oninput="calculateVoteBreakdown()"
+          />
+          <p class="red">
+            Trump: <output id="rTrumpPercent">50</output>%
+            <span class="percentage-divider">|</span>
+            <span class="blue"
+              >Harris: <output id="rHarrisPercent">50</output>%</span
+            >
+          </p>
+          <p class="red">
+            Total Trump Votes (R): <output id="rTrumpVotes">0</output>
+          </p>
+          <p class="blue">
+            Total Harris Votes (R): <output id="rHarrisVotes">0</output>
+          </p>
         </div>
 
-        <!-- Grand Total for Trump and Harris -->
-        <h2>Grand Total Votes</h2>
-       <!-- Grand Total for Trump and Harris, now aligned and centered -->
-<div class="total-votes-container">
-    <p class="total-votes red">Total Trump Votes: <output id="grandTotalTrumpVotes">0</output></p>
-    <p class="total-votes blue">Total Harris Votes: <output id="grandTotalHarrisVotes">0</output></p>
-</div>
-
-
-        <!-- Current Projected Firewall -->
-        <div class="firewall">
-            <p id="firewallResult">Current Projected Firewall: Trump + 0</p>
+        <!-- D Ballot Returns Vote Breakdown -->
+        <div class="breakdown-column">
+          <h3>Democrat</h3>
+          <input
+            type="range"
+            id="dVoteBreakdown"
+            min="0"
+            max="100"
+            value="50"
+            oninput="calculateVoteBreakdown()"
+          />
+          <p class="red">
+            Trump: <output id="dTrumpPercent">50</output>%
+            <span class="percentage-divider">|</span>
+            <span class="blue"
+              >Harris: <output id="dHarrisPercent">50</output>%</span
+            >
+          </p>
+          <p class="red">
+            Total Trump Votes (D): <output id="dTrumpVotes">0</output>
+          </p>
+          <p class="blue">
+            Total Harris Votes (D): <output id="dHarrisVotes">0</output>
+          </p>
         </div>
+
+        <!-- Other Ballot Returns Vote Breakdown -->
+        <div class="breakdown-column">
+          <h3>Other</h3>
+          <input
+            type="range"
+            id="oVoteBreakdown"
+            min="0"
+            max="100"
+            value="50"
+            oninput="calculateVoteBreakdown()"
+          />
+          <p class="red">
+            Trump: <output id="oTrumpPercent">50</output>%
+            <span class="percentage-divider">|</span>
+            <span class="blue"
+              >Harris: <output id="oHarrisPercent">50</output>%</span
+            >
+          </p>
+          <p class="red">
+            Total Trump Votes (Other): <output id="oTrumpVotes">0</output>
+          </p>
+          <p class="blue">
+            Total Harris Votes (Other): <output id="oHarrisVotes">0</output>
+          </p>
+        </div>
+      </div>
+
+      <!-- Grand Total for Trump and Harris -->
+      <h2>Grand Total Votes</h2>
+      <!-- Grand Total for Trump and Harris, now aligned and centered -->
+      <div class="total-votes-container">
+        <p class="total-votes red">
+          Total Trump Votes: <output id="grandTotalTrumpVotes">0</output>
+        </p>
+        <p class="total-votes blue">
+          Total Harris Votes: <output id="grandTotalHarrisVotes">0</output>
+        </p>
+      </div>
+
+      <!-- Current Projected Firewall -->
+      <div class="firewall">
+        <p id="firewallResult">Current Projected Firewall: Trump + 0</p>
+      </div>
     </div>
 
     <!-- Explanation Section -->
     <div class="explanation">
-        <h2>How It Works</h2>
-        <p>This calculator allows users to simulate ballot requests and return rates for different political parties and see the projected outcome in terms of votes for two candidates, Trump and Harris. Here's a breakdown of how it works:</p>
-        <ul>
-            <li><strong>Ballot Requests:</strong> Adjust the sliders to set the number of ballots requested by each party. This simulates the total ballots distributed to voters of each party.</li>
-            <li><strong>Return Rate:</strong> This percentage indicates how many of the distributed ballots are expected to be returned and counted. You can adjust this to simulate different levels of voter turnout.</li>
-            <li><strong>Vote Breakdown:</strong> Once ballots are returned, use the sliders to adjust the percentage of votes each candidate receives from the returned ballots. This reflects the party loyalty and crossover votes.</li>
-            <li><strong>Projected Firewall:</strong> The calculator then sums up the votes from all parties for both candidates and displays who is leading. If one candidate has more votes, the firewall will show the lead amount and the leading candidate.</li>
-        </ul>
-        <p>The 'Current Projected Firewall' shows which candidate is projected to lead based on the total votes calculated from the sliders' settings, providing a quick snapshot of the potential election outcome.</p>
-        <p><strong>Note:</strong> This is a general estimating tool meant to provide a rough projection based on the input values. It does not account for vote shares for third parties, which will inevitably have a small impact on the final projections. The estimates should be viewed with this limitation in mind.</p>
+      <h2>How It Works</h2>
+      <p>
+        This calculator allows users to simulate ballot requests and return
+        rates for different political parties and see the projected outcome in
+        terms of votes for two candidates, Trump and Harris. Here's a breakdown
+        of how it works:
+      </p>
+      <ul>
+        <li>
+          <strong>Ballot Requests:</strong> Adjust the sliders to set the number
+          of ballots requested by each party. This simulates the total ballots
+          distributed to voters of each party.
+        </li>
+        <li>
+          <strong>Return Rate:</strong> This percentage indicates how many of
+          the distributed ballots are expected to be returned and counted. You
+          can adjust this to simulate different levels of voter turnout.
+        </li>
+        <li>
+          <strong>Vote Breakdown:</strong> Once ballots are returned, use the
+          sliders to adjust the percentage of votes each candidate receives from
+          the returned ballots. This reflects the party loyalty and crossover
+          votes.
+        </li>
+        <li>
+          <strong>Projected Firewall:</strong> The calculator then sums up the
+          votes from all parties for both candidates and displays who is
+          leading. If one candidate has more votes, the firewall will show the
+          lead amount and the leading candidate.
+        </li>
+      </ul>
+      <p>
+        The 'Current Projected Firewall' shows which candidate is projected to
+        lead based on the total votes calculated from the sliders' settings,
+        providing a quick snapshot of the potential election outcome.
+      </p>
+      <p>
+        <strong>Note:</strong> This is a general estimating tool meant to
+        provide a rough projection based on the input values. It does not
+        account for vote shares for third parties, which will inevitably have a
+        small impact on the final projections. The estimates should be viewed
+        with this limitation in mind.
+      </p>
     </div>
 
     <!-- Script -->
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
